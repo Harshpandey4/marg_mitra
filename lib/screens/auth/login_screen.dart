@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 import '../../models/user_model.dart';
 import '../../providers/auth_provider.dart';
+import '../../terms_condition.dart';
 
 class IntegratedLoginScreen extends ConsumerStatefulWidget {
   const IntegratedLoginScreen({super.key});
@@ -654,6 +655,9 @@ class _IntegratedLoginScreenState extends ConsumerState<IntegratedLoginScreen>
                       const SizedBox(height: 24),
 
                       // Checkboxes
+                      // Replace the existing Checkboxes section (around line 615-685) with this updated code:
+
+// Checkboxes
                       Row(
                         children: [
                           Expanded(
@@ -738,12 +742,24 @@ class _IntegratedLoginScreenState extends ConsumerState<IntegratedLoginScreen>
                                   ),
                                   const SizedBox(width: 8),
                                   Flexible(
-                                    child: Text(
-                                      'Accept T&C',
-                                      style: TextStyle(
-                                        color: Colors.blue[700],
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // Navigate to Terms & Conditions screen
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const TermsConditionsScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        'Accept T&C',
+                                        style: TextStyle(
+                                          color: Colors.blue[700],
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          decoration: TextDecoration.underline,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -753,9 +769,7 @@ class _IntegratedLoginScreenState extends ConsumerState<IntegratedLoginScreen>
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 32),
-
                       // Send OTP Button
                       SizedBox(
                         height: 52,

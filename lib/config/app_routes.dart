@@ -59,12 +59,12 @@ class AppRoutes {
     );
   }
 
-  // Helper method to go back
+  // Helper method togo back
   static void goBack(BuildContext context, [dynamic result]) {
     Navigator.pop(context, result);
   }
 
-  // Helper method for conditional navigation
+  // Helper method for conditional nav..
   static void navigateToUserOrProvider(BuildContext context, bool isProvider) {
     if (isProvider) {
       navigateAndClearStack(context, providerDashboard);

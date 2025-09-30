@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:trevel_partner/main.dart';
+import 'package:marg_mitra/main.dart';
 
 void main() {
   testWidgets('App loads and shows splash screen', (WidgetTester tester) async {

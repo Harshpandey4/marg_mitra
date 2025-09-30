@@ -65,7 +65,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  // ✅ Updated login method to verify OTP with user type support
+  //   login method to verify OTP with user type support
   Future<void> login(String phone, String otp, {bool isProvider = false}) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
@@ -105,7 +105,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  // ✅ Method to resend OTP
+  // Method to resend OTP
   Future<void> resendOTP(String phone, {bool isProvider = false}) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
@@ -129,7 +129,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  // ✅ Updated register method with better role handling
+  // register method with user role handling
   Future<void> register(String name, String phone, String userType, {String? email}) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
@@ -177,7 +177,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  // ✅ Method to verify phone number without OTP (for testing)
+  // Method to verify phone number without OTP (for testing)
   Future<void> verifyPhoneNumber(String phone, {bool isProvider = false}) async {
     state = state.copyWith(isLoading: true, errorMessage: null);
 
@@ -201,12 +201,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  // ✅ Clear error message
+  //  Clear error message
   void clearError() {
     state = state.copyWith(errorMessage: null);
   }
 
-  // ✅ Logout method
+  // Logout method
   void logout() {
     state = const AuthState(
       currentUser: null,
@@ -216,10 +216,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
     );
   }
 
-  // ✅ Check if user is provider
+  // Check if user is provider
   bool get isProvider => state.currentUser?.role == UserRole.provider;
 
-  // ✅ Check if user is admin
+  // Check if user is admin
   bool get isAdmin => state.currentUser?.role == UserRole.admin;
 }
 

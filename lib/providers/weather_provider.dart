@@ -15,7 +15,7 @@ class WeatherData {
   final String windDirection;
   final double visibility;
   final double pressure;
-  final String condition; // clear, cloudy, rainy, stormy, foggy, snowy
+  final String condition; // clear, cloudy and many more ,,
   final DateTime timestamp;
   final double rainfall;
   final String mainCondition;
@@ -123,7 +123,7 @@ class WeatherData {
   }
 }
 
-// Weather alert class to fix the error in dashboard
+// Weather alert class
 class WeatherAlert {
   final String event;
   final String description;
@@ -186,7 +186,7 @@ class WeatherState {
     return safetyLevel;
   }
 
-  // Method to get weather alerts - Fixed to return List<WeatherAlert>
+  // Method to get weather alerts -   to return List<WeatherAlert>
   List<WeatherAlert>? get alerts {
     if (currentWeather?.alerts.isEmpty != false) return null;
 
@@ -202,7 +202,7 @@ class WeatherState {
 class WeatherNotifier extends StateNotifier<WeatherState> {
   WeatherNotifier() : super(WeatherState());
 
-  // OpenWeatherMap API key - Replace with your actual API key
+  // OpenWeatherMap api key section
   static const String _apiKey = '5dd6187152e21d7e56ad742133659595';
   static const String _baseUrl = 'https://api.openweathermap.org/data/2.5';
 

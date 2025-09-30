@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Professional Color Palette
+  // Color Palette
   static const Color primaryColor = Color(0xFF1565C0); // Deep Blue
   static const Color primaryVariant = Color(0xFF0D47A1); // Darker Blue
   static const Color secondaryColor = Color(0xFF37474F); // Blue Grey
@@ -319,7 +319,7 @@ class AppTheme {
 
     // Color Scheme
     colorScheme: const ColorScheme.dark(
-      primary: Color(0xFF90CAF9), // Lighter blue for dark theme
+      primary: Color(0xFF90CAF9),
       primaryContainer: Color(0xFF1565C0),
       secondary: Color(0xFF90A4AE),
       secondaryContainer: Color(0xFF37474F),
