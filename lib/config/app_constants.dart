@@ -1,6 +1,6 @@
 class AppConstants {
   static const String appName = 'Marg Mitra';
-  static const String tagline = 'Aapki Roadside Suraksha Ka Saathi';
+  static const String tagline = 'Your journey is our responsibility';
   // API endpoints
   static const String baseUrl = 'https://api.margmitra.com';
   static const String authEndpoint = '/auth';

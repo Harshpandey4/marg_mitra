@@ -5,11 +5,15 @@ import 'screens/auth/login_screen.dart';
 import 'screens/auth/signup_screen.dart';
 import 'screens/auth/otp_verification_screen.dart';
 import 'screens/auth/splash_screen.dart';
+import 'screens/auth/anonymous_sos_screen.dart';
 import 'screens/user/user_dashboard_screen.dart';
 import 'screens/user/sos_request_screen.dart';
 import 'screens/user/tracking_screen.dart';
 import 'screens/user/payment_screen.dart';
 import 'screens/user/review_screen.dart';
+import 'screens/user/user_service_provider_communication_screen.dart';
+import 'screens/user/emergency_tracking_screen.dart';
+import 'screens/user/video_call_screen.dart';
 import 'screens/common/profile_screen.dart';
 import 'screens/common/settings_screen.dart';
 import 'screens/common/notifications_screen.dart';
@@ -28,20 +32,19 @@ import 'screens/provider/emergency_contact_screen.dart';
 import 'screens/provider/service_management_screen.dart';
 import 'screens/provider/earnings_screen.dart';
 import 'screens/provider/request_detail_screen.dart';
-import 'screens/provider/service_history_screen.dart';
+import 'features/health_monitoring/screens/health_dashboard_screen.dart';
+import 'features/health_monitoring/screens/device_settings_screen.dart';
+import 'features/health_monitoring/screens/smartwatch_setup_screen.dart';
 import 'services/notification_service.dart';
 import 'config/theme_provider.dart';
-import 'screens/user/user_service_provider_communication_screen.dart';
 
 final appTitleProvider = Provider<String>((ref) => 'Marg Mitra');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final container = ProviderContainer();
   await container.read(notificationServiceProvider).initialize();
   container.dispose();
-
   runApp(
     const ProviderScope(
       child: MargMitraApp(),
@@ -77,11 +80,9 @@ class MargMitraApp extends ConsumerWidget {
         AppRoutes.splash: (context) => const SplashScreen(),
         AppRoutes.login: (context) => const IntegratedLoginScreen(),
         AppRoutes.signup: (context) => const SignUpScreen(),
+        AppRoutes.anonymousSos: (context) => AnonymousSosScreen(),
         AppRoutes.otpVerification: (context) {
-          final arguments = ModalRoute
-              .of(context)!
-              .settings
-              .arguments;
+          final arguments = ModalRoute.of(context)!.settings.arguments;
           if (arguments is Map<String, dynamic>) {
             return OTPVerificationScreen(
               phoneNumber: arguments['phone'] as String,
@@ -94,38 +95,38 @@ class MargMitraApp extends ConsumerWidget {
             );
           } else {
             throw ArgumentError(
-                'Invalid arguments passed to OTP verification screen');
+              'Invalid arguments passed to OTP verification screen',
+            );
           }
         },
 
         // User Routes
-        AppRoutes.userDashboard: (context) => const UserDashboardScreen(),
+        AppRoutes.userDashboard: (context) => UserDashboardScreen(),
         AppRoutes.sosRequest: (context) => SOSRequestScreen(),
         AppRoutes.tracking: (context) => const TrackingScreen(),
         AppRoutes.payment: (context) => PaymentScreen(),
         AppRoutes.review: (context) => const ReviewScreen(),
+        AppRoutes.emergencyTracking: (context) => const EmergencyTrackingScreen(),
+        AppRoutes.videoCall: (context) => const VideoCallScreen(),
 
-        //   User Service Provider Communication Route
+        // User Service Provider Communication Route
         AppRoutes.userServiceProviderCommunication: (context) {
-          final args = ModalRoute
-              .of(context)!
-              .settings
-              .arguments as Map<String, dynamic>? ?? {};
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>? ?? {};
           return UserProviderCommunicationScreen(
-            providerId: args['providerId'] as String? ?? 'provider_${DateTime
-                .now()
-                .millisecondsSinceEpoch}',
+            providerId: args['providerId'] as String? ?? 'provider_${DateTime.now().millisecondsSinceEpoch}',
             providerName: args['providerName'] as String? ?? 'Service Provider',
             providerPhone: args['providerPhone'] as String? ?? '+91XXXXXXXXXX',
-            providerVehicle: args['providerVehicle'] as String? ??
-                'Vehicle Details',
+            providerVehicle: args['providerVehicle'] as String? ?? 'Vehicle Details',
             serviceType: args['serviceType'] as String? ?? 'General Service',
-            requestId: args['requestId'] as String? ?? 'request_${DateTime
-                .now()
-                .millisecondsSinceEpoch}',
+            requestId: args['requestId'] as String? ?? 'request_${DateTime.now().millisecondsSinceEpoch}',
             providerRating: args['providerRating'] as double? ?? 4.0,
           );
         },
+
+        // Health Monitoring Routes
+        AppRoutes.healthDashboard: (context) => const HealthDashboardScreen(),
+        AppRoutes.deviceSettings: (context) => const DeviceSettingsScreen(),
+        AppRoutes.smartwatchSetup: (context) => SmartwatchSetupScreen(),
 
         // Common Routes
         AppRoutes.profile: (context) => const ProfileScreen(),
@@ -145,52 +146,33 @@ class MargMitraApp extends ConsumerWidget {
         AppRoutes.serviceHistory: (context) => const ServiceHistoryScreen(),
         AppRoutes.providerSettings: (context) => ProviderSettingsScreen(),
         AppRoutes.emergencyContact: (context) => EmergencyContactScreen(),
-        AppRoutes.documentVerification: (
-            context) => const DocumentVerificationScreen(),
+        AppRoutes.documentVerification: (context) => const DocumentVerificationScreen(),
 
         // Provider Routes with Arguments
         AppRoutes.requestDetail: (context) {
-          final args = ModalRoute
-              .of(context)!
-              .settings
-              .arguments as Map<String, dynamic>? ?? {};
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>? ?? {};
           return RequestDetailScreen(
             requestId: args['requestId'] as String? ?? '',
             serviceData: args['serviceData'] as Map<String, dynamic>? ?? {},
           );
         },
-
         AppRoutes.navigation: (context) {
-          final args = ModalRoute
-              .of(context)!
-              .settings
-              .arguments as Map<String, dynamic>? ?? {};
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>? ?? {};
           return NavigationScreen(
             customerName: args['customerName'] as String? ?? 'Unknown Customer',
-            customerAddress: args['customerAddress'] as String? ??
-                'Address not provided',
-            customerPhone: args['customerPhone'] as String? ??
-                'Phone not provided',
+            customerAddress: args['customerAddress'] as String? ?? 'Address not provided',
+            customerPhone: args['customerPhone'] as String? ?? 'Phone not provided',
             serviceType: args['serviceType'] as String? ?? 'General Service',
           );
         },
-
-        //  CustomerCommunicationScreen with   required parameters
         AppRoutes.customerCommunication: (context) {
-          final args = ModalRoute
-              .of(context)!
-              .settings
-              .arguments as Map<String, dynamic>? ?? {};
+          final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>? ?? {};
           return CustomerCommunicationScreen(
-            customerId: args['customerId'] as String? ?? 'customer_${DateTime
-                .now()
-                .millisecondsSinceEpoch}',
+            customerId: args['customerId'] as String? ?? 'customer_${DateTime.now().millisecondsSinceEpoch}',
             customerName: args['customerName'] as String? ?? 'Customer',
             customerPhone: args['customerPhone'] as String? ?? '+91XXXXXXXXXX',
             serviceType: args['serviceType'] as String? ?? 'General Service',
-            requestId: args['requestId'] as String? ?? 'request_${DateTime
-                .now()
-                .millisecondsSinceEpoch}',
+            requestId: args['requestId'] as String? ?? 'request_${DateTime.now().millisecondsSinceEpoch}',
           );
         },
       },

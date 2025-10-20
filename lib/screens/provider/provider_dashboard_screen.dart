@@ -697,13 +697,13 @@ class _ProviderDashboardScreenState extends State<ProviderDashboardScreen>
             mainAxisSpacing: 12,
             children: [
               _buildQuickActionCard(
-                'Job\nManagement',
+                'Job Operations',
                 Icons.work_outline,
                 Colors.blue,
                     () => _navigateToJobManagement(),
               ),
               _buildQuickActionCard(
-                'Service\nHistory',
+                'Service History',
                 Icons.history,
                 Colors.purple,
                     () => _navigateToServiceHistory(),

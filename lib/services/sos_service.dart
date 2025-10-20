@@ -10,7 +10,7 @@ class SosService {
 
   SosService();
 
-  /// Advanced SOS trigger with multi-sensor fusion and AI coordination
+  /// SOS trigger with multi-sensor fusion and AI coordination
   Future<void> triggerAdvancedSos({
     required Map<String, dynamic> emergencyData,
     bool multiAgencyCoordination = true,
@@ -18,10 +18,10 @@ class SosService {
     List<String>? customContacts,
   }) async {
     try {
-      // Get current location (mock for now - replace with actual location service)
+      // Get current location
       final mockPosition = await _getCurrentLocation();
 
-      // Enhanced emergency data with Marg Mitra features
+      //   emergency data
       final enhancedSosData = {
         'emergencyId': _generateEmergencyId(),
         'timestamp': DateTime.now().toIso8601String(),
@@ -62,7 +62,7 @@ class SosService {
         await _notifyEmergencyContacts(enhancedSosData, customContacts);
       }
 
-      // 3. AI-Powered Emergency Classification and Response
+      // 3. Emergency Classification and Response
       await _classifyAndRespond(enhancedSosData);
 
       // 4. Real-time Location Tracking
@@ -79,7 +79,6 @@ class SosService {
     }
   }
 
-  /// Multi-agency emergency response coordination
   Future<void> _coordinateMultiAgencyResponse(Map<String, dynamic> sosData) async {
     try {
       print('🚨 Coordinating multi-agency emergency response...');
@@ -106,7 +105,7 @@ class SosService {
     }
   }
 
-  /// Contact specific emergency service with contextual data
+  /// Contact specific emergency service with contextual deta
   Future<void> _contactEmergencyService(
       String agency,
       Map<String, dynamic> sosData,
@@ -161,7 +160,7 @@ class SosService {
     }
   }
 
-  /// Notify family and emergency contacts
+  /// Notify family and emergency contacts..
   Future<void> _notifyEmergencyContacts(Map<String, dynamic> sosData, List<String>? customContacts) async {
     try {
       print('📱 Notifying emergency contacts...');
@@ -191,7 +190,6 @@ class SosService {
     }
   }
 
-  /// AI-powered emergency classification and response
   Future<void> _classifyAndRespond(Map<String, dynamic> sosData) async {
     try {
       print('🤖 AI classifying emergency and optimizing response...');
@@ -216,7 +214,7 @@ class SosService {
 
       await platform.invokeMethod('startLocationTracking', {
         'emergencyId': emergencyId,
-        'updateInterval': 10, // seconds
+        'updateInterval': 10, // sec..
         'highAccuracy': true,
       });
 
@@ -319,7 +317,7 @@ class SosService {
     );
   }
 
-  /// Trigger SOS with weather context (enhanced)
+  /// Trigger SOS with weather context
   Future<void> triggerSosWithWeather({
     WeatherData? weather,
     required RoadSafetyLevel safetyLevel,
@@ -345,7 +343,7 @@ class SosService {
       familyNotification: true,
     );
 
-    // Additional weather-specific protocols
+    //  weather-specific protocols
     if (safetyLevel == RoadSafetyLevel.dangerous) {
       await _triggerEmergencyWeatherProtocol({
         'latitude': 26.7806,
@@ -354,7 +352,7 @@ class SosService {
     }
   }
 
-  /// Additional emergency protocol for dangerous weather conditions
+  /// emergency protocol for dangerous weather conditions
   Future<void> _triggerEmergencyWeatherProtocol(
       dynamic position,
       WeatherData? weather,
@@ -393,7 +391,7 @@ class SosService {
     }
   }
 
-  /// Test emergency systems (for development)
+  /// Test emergency systems
   Future<void> testEmergencySystems() async {
     try {
       print('🧪 Testing emergency systems...');

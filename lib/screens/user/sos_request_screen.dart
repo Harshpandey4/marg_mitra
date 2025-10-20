@@ -4,11 +4,14 @@ import '../../config/theme.dart';
 import '../../config/app_constants.dart';
 import 'tracking_screen.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
-
 class SOSRequestScreen extends StatefulWidget {
   final String? preselectedService;
+  final bool isFromQuickService;
 
-  SOSRequestScreen({this.preselectedService});
+  SOSRequestScreen({
+    this.preselectedService,
+    this.isFromQuickService = false,
+  });
 
   @override
   _SOSRequestScreenState createState() => _SOSRequestScreenState();
@@ -36,6 +39,11 @@ class _SOSRequestScreenState extends State<SOSRequestScreen>
     super.initState();
     selectedService = widget.preselectedService;
     _initializeAnimations();
+
+    // If coming from quick service, pre-fill some helpful text
+    if (widget.isFromQuickService && widget.preselectedService != null) {
+      descriptionController.text = 'I need ${widget.preselectedService} service. ';
+    }
 
     // Simulate location loading
     Future.delayed(Duration(seconds: 2), () {
@@ -293,6 +301,19 @@ class _SOSRequestScreenState extends State<SOSRequestScreen>
   }
 
   Widget _buildServiceSelectionSection() {
+    // Create combined service list
+    List<String> allServices = [
+      ...AppConstants.serviceTypes,
+    ];
+
+    // Add custom services if not already present
+    final customServices = ['Towing', 'Battery', 'Flat Tire', 'Fuel', 'Lockout', 'Mechanic', 'Unidentified'];
+    for (var service in customServices) {
+      if (!allServices.contains(service)) {
+        allServices.add(service);
+      }
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -328,7 +349,7 @@ class _SOSRequestScreenState extends State<SOSRequestScreen>
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: AppConstants.serviceTypes.asMap().entries.map((entry) {
+            children: allServices.asMap().entries.map((entry) {
               int index = entry.key;
               String service = entry.value;
               bool isSelected = selectedService == service;

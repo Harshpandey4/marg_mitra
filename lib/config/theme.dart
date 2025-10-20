@@ -366,7 +366,7 @@ class AppTheme {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     ),
 
-    // Updated text theme for dark mode
+    //  text theme for dark mode
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 32,
@@ -476,7 +476,7 @@ class AppTheme {
     ),
   );
 
-  // Utility methods for consistent styling
+  // Utility methods
   static BoxDecoration get cardDecoration => BoxDecoration(
     color: cardColor,
     borderRadius: BorderRadius.circular(16),

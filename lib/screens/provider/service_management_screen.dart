@@ -1272,7 +1272,7 @@ class _ServiceManagementScreenState extends State<ServiceManagementScreen>
     );
   }
 
-  // Enhanced Dialog methods with actual functionality
+  // Dialog methods with   functionality
   void _showServiceConfigDialog(String title, String serviceKey) {
     final baseRateController = TextEditingController(
         text: _serviceConfig[serviceKey]?['baseRate']?.toString() ?? '500'

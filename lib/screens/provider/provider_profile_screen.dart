@@ -605,7 +605,7 @@ class _ProviderProfileScreenState extends State<ProviderProfileScreen>
                   },
                 ),
               ),
-              SizedBox(width: 16),
+              SizedBox(width: 6),
               Expanded(child: _buildLanguageDropdown()),
             ],
           ),
@@ -620,7 +620,7 @@ class _ProviderProfileScreenState extends State<ProviderProfileScreen>
 
   Widget _buildLanguageDropdown() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: EdgeInsets.symmetric(horizontal: 3),
       decoration: BoxDecoration(
         border: Border.all(color: _isEditing ? AppTheme.primaryColor : Colors.grey[300]!),
         borderRadius: BorderRadius.circular(12),

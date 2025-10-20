@@ -8,6 +8,7 @@ class AppRoutes {
   static const String login = '/login';
   static const String signup = '/signup';
   static const String otpVerification = '/otp-verification';
+  static const String anonymousSos = '/anonymous-sos';
 
   // User routes
   static const String userDashboard = '/user-dashboard';
@@ -16,7 +17,14 @@ class AppRoutes {
   static const String payment = '/payment';
   static const String review = '/review';
   static const String rewards = '/rewards';
-  static const String userServiceProviderCommunication = '/user-service-provider-communication'; // NEW
+  static const String userServiceProviderCommunication = '/user-service-provider-communication';
+  static const String emergencyTracking = '/emergency-tracking';
+  static const String videoCall = '/video-call';
+
+  // Health Monitoring routes
+  static const String healthDashboard = '/health-dashboard';
+  static const String deviceSettings = '/device-settings';
+  static const String smartwatchSetup = '/smartwatch-setup';
 
   // Common routes
   static const String profile = '/profile';
@@ -59,12 +67,12 @@ class AppRoutes {
     );
   }
 
-  // Helper method togo back
+  // Helper method to go back
   static void goBack(BuildContext context, [dynamic result]) {
     Navigator.pop(context, result);
   }
 
-  // Helper method for conditional nav..
+  // Helper method for conditional navigation
   static void navigateToUserOrProvider(BuildContext context, bool isProvider) {
     if (isProvider) {
       navigateAndClearStack(context, providerDashboard);
@@ -132,7 +140,7 @@ class AppRoutes {
     );
   }
 
-  // NEW: Helper method to navigate to user service provider communication (User side)
+  // Helper method to navigate to user service provider communication (User side)
   static void navigateToUserServiceProviderCommunication(
       BuildContext context, {
         required String providerId,
@@ -158,7 +166,68 @@ class AppRoutes {
     );
   }
 
-  // Helper method to navigate to OTP verification with proper arguments
+  // Helper method to navigate to emergency tracking (User side)
+  static void navigateToEmergencyTracking(
+      BuildContext context, {
+        String? requestId,
+      }) {
+    navigateTo(
+      context,
+      emergencyTracking,
+      arguments: {
+        'requestId': requestId,
+      },
+    );
+  }
+
+  // Helper method to navigate to video call (User & Provider)
+  static void navigateToVideoCall(
+      BuildContext context, {
+        required String callId,
+        required String otherPersonName,
+        required String otherPersonPhone,
+      }) {
+    navigateTo(
+      context,
+      videoCall,
+      arguments: {
+        'callId': callId,
+        'otherPersonName': otherPersonName,
+        'otherPersonPhone': otherPersonPhone,
+      },
+    );
+  }
+
+  // Helper method to navigate to anonymous SOS
+  static void navigateToAnonymousSos(BuildContext context) {
+    navigateTo(context, anonymousSos);
+  }
+
+  // Helper method to navigate to health dashboard
+  static void navigateToHealthDashboard(BuildContext context) {
+    navigateTo(context, healthDashboard);
+  }
+
+  // Helper method to navigate to device settings
+  static void navigateToDeviceSettings(
+      BuildContext context, {
+        String? deviceId,
+      }) {
+    navigateTo(
+      context,
+      deviceSettings,
+      arguments: {
+        'deviceId': deviceId,
+      },
+    );
+  }
+
+  // Helper method to navigate to smartwatch setup
+  static void navigateToSmartWatchSetup(BuildContext context) {
+    navigateTo(context, smartwatchSetup);
+  }
+
+  // Helper method to navigate to OTP verification with arguments
   static void navigateToOTPVerification(
       BuildContext context, {
         required String phoneNumber,
